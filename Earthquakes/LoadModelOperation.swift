@@ -64,7 +64,7 @@ class LoadModelOperation:YMOperation{
         }
         
         if persistentStoreCoordinator.persistentStores.isEmpty {
-            print("Error creating SQLite store: \(error).")
+            print("Error creating SQLite store: \(String(describing: error)).")
             print("Falling back to `.InMemory` store.")
             error = createStore(persistentStoreCoordinator, atURL: nil, type: NSInMemoryStoreType)
         }

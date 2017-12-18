@@ -31,7 +31,7 @@ class DownloadEarthquakesOperation: GroupOperation {
         */
         let url = URL(string: "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojson")!
         let task = URLSession.shared.downloadTask(with: url, completionHandler: { url, response, error in
-            self.downloadFinished(url, response: response as? HTTPURLResponse, error: error as? NSError)
+            self.downloadFinished(url, response: response as? HTTPURLResponse, error: error as NSError?)
         }) 
         
         let taskOperation = URLSessionTaskOperation(task: task)

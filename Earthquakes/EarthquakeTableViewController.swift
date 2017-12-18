@@ -92,13 +92,13 @@ class EarthquakeTableViewController: UITableViewController {
             an `Operation`, we can make it mutually exclusive with other operations
             that modify the view controller hierarchy.
         */
-        let shareOperation = YMBlockOperation { (continuation: @escaping (Void) -> Void) in
+        let shareOperation = YMBlockOperation { (continuation: @escaping () -> Void) in
             DispatchQueue.main.async {
                 let shareSheet = UIActivityViewController(activityItems: items, applicationActivities: nil)
                 
                 shareSheet.popoverPresentationController?.barButtonItem = sender
 
-                shareSheet.completionWithItemsHandler = { _ in
+                shareSheet.completionWithItemsHandler = { (_, _, _, _) in
                     // End the operation when the share sheet completes.
                     continuation()
                 }

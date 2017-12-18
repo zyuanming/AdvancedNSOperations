@@ -38,7 +38,7 @@ class EarthquakesTableViewController: UITableViewController {
                 self.updateUI()
             }
         }
-
+//
         operationQueue.addOperation(operation)
     }
 
