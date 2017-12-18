@@ -14,18 +14,19 @@ import Foundation
     extended readiness requirements, as well as notify many interested parties
     about interesting operation state changes
 */
+//@objcMembers
 class YMOperation: Operation {
     
     // use the KVO mechanism to indicate that changes to "state" affect other properties as well
-    class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
+    @objc class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
         return ["state" as NSObject]
     }
     
-    class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
+    @objc class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
         return ["state" as NSObject]
     }
     
-    class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
+    @objc class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
         return ["state" as NSObject]
     }
     
@@ -149,7 +150,7 @@ class YMOperation: Operation {
                 return false
             
             case .ready:
-                return super.isReady || isCancelled
+                return true
             
             default:
                 return false
@@ -213,16 +214,16 @@ class YMOperation: Operation {
     
     // MARK: Execution and Cancellation
     
-    override final func start() {
-        // NSOperation.start() contains important logic that shouldn't be bypassed.
-        super.start()
-        
-        // If the operation has been cancelled, we still need to enter the "Finished" state.
-        if isCancelled {
-            finish()
-        }
-    }
-    
+//    override final func start() {
+//        // NSOperation.start() contains important logic that shouldn't be bypassed.
+//        super.start()
+//
+//        // If the operation has been cancelled, we still need to enter the "Finished" state.
+//        if isCancelled {
+//            finish()
+//        }
+//    }
+
     override final func main() {
         assert(state == .ready, "This operation must be performed on an operation queue.")
 
